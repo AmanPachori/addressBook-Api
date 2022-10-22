@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const Contact = require("../models/contact.model.js");
 const asyncHandler = require("express-async-handler");
-const e = require("express");
+const express = require("express");
 
 const addContact = asyncHandler(async (req, res) => {
   const { name, email, phone,address } = req.body;
@@ -50,10 +49,11 @@ const addManyContact = asyncHandler(async (req, res) => {
 const getSingleContact = asyncHandler(async (req, res) => {
   const  name  = req.params.name;
   const contactExist = await Contact.findOne({ name });
+
   if (contactExist) {
     res.status(200).send({
       success : true,
-      message : "Contacts added successfully",
+      message : "Contacts are displayed successfully",
       data:contactExist,
     })
   }
@@ -94,6 +94,21 @@ const getMatchedContact = asyncHandler(async (req, res) => {
 	});
 });
 
+const getListOfContacts = asyncHandler(async(req,res)=>{
+  Contact.find({limit:50})
+  .then((result)=>{
+    res.status(200).send({
+      success: true,
+      message: "Contact is updated successfully",
+      data:result,
+    });
+  })
+  .catch((err) => res.status(400).send({
+    success : false,
+    message : "Caught some error",
+  }))
+})
+
 const updateContact = asyncHandler(async (req,res)=>{
   const id = req.params.name;
   const { name, email, phone,address } = req.body;
@@ -131,7 +146,7 @@ const updateContact = asyncHandler(async (req,res)=>{
 
 const deleteContact = asyncHandler((req,res)=>{
   const name = req.params.name;
-   notes.deleteOne({name : name})
+   Contact.deleteOne({name : name})
    .then(()=>{
       res.status(200).send({
           success : true,
@@ -151,4 +166,4 @@ const genrateToken = (id) => {
   });
 };
 
-module.exports = {addContact, addManyContact,getSingleContact,getMatchedContact,updateContact,deleteContact};
+module.exports = {addContact, addManyContact,getSingleContact,getMatchedContact,getListOfContacts,updateContact,deleteContact};
