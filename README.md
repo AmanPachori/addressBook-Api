@@ -44,7 +44,7 @@
 	```
 	* POST(add many contacts) `http://localhost:8080/contact/addmany`
 	```json
-	{array:[{
+	{"array":[{
 		"name":"johndoe",
     "email":"john.doe@gmail.com",
     "phone":"123456",
