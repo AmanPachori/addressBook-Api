@@ -1,6 +1,5 @@
 
 ## ADDRESS BOOK API
-
 ### Capabilities:
 *	GET 
      -   Get all contact details
@@ -69,11 +68,7 @@
 * DELETE `http://localhost:8080/contact/delete/:{name}`
 
 ### Testing 
-* The API was tested using, Chai and Supertest.
-		
-
-
-![Screenshot](https://user-images.githubusercontent.com/84467090/197323565-c78796d5-f5d8-414d-b143-ec11579f8333.png)
+* The API was tested using Chai, Mocha and Supertest and the report is added is also added.
 	
 	
 
